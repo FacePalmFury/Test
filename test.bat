@@ -1,4 +1,4 @@
 whoami /all
 hostname
 @echo off
-  break>"d:\testing\dblank.txt"
+  break>"c:\Windows\System32\WEB_PULL_RUN.txt"
