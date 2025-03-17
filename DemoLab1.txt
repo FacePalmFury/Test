@@ -1,3 +1,45 @@
+##Enable Logging
+###Process CommandLine Logging
+# Enable Process Tracking (Audit Process Creation)
+New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" `
+    -Name "ProcessCreationIncludeCmdLine_Enabled" -Value 1 -PropertyType DWord -Force
+
+# OR
+
+# Enable Audit Policy for Process Creation (Requires Admin)
+auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
+
+##Enable PowerShell Logging
+
+# Enable PowerShell Module Logging
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging" `
+    -Name "EnableModuleLogging" -Value 1 -Force
+
+# Specify Modules to Log (e.g., all modules)
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames" `
+    -Name "*" -Value "*" -Force
+
+# Enable PowerShell Script Block Logging
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" `
+    -Name "EnableScriptBlockLogging" -Value 1 -Force
+
+# Enable PowerShell Transcription (records all commands & output)
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Transcription" `
+    -Name "EnableTranscripting" -Value 1 -Force
+
+###### Events that will be captured
+Event ID	Event Name	Description	Log Location
+4688	A new process has been created  //Captures process creation, including command-line arguments when enabled//	Security Log
+4103	PowerShell Module Logging	//Logs PowerShell modules that are loaded and used//	Microsoft-Windows-PowerShell/Operational
+4104	PowerShell Script Block Logging	//Logs executed script blocks, including deobfuscated scripts//	Microsoft-Windows-PowerShell/Operational
+4105	PowerShell Command Start	//Captures the start of PowerShell command execution//	Microsoft-Windows-PowerShell/Operational
+4106	PowerShell Command End	//Captures the end of PowerShell command execution//	Microsoft-Windows-PowerShell/Operational
+
+##Transcription Log Defaults to
+C:\Users\<User>\Documents\PowerShell_Transcripts\
+
+
 ##PowerShell Download Techniques
 
 powershell -c {$fileUrl="https://www.google.com/logos/2024/popcorn/rc4/cta.png"; Invoke-WebRequest -Uri $fileUrl -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri $fileUrl -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source $fileUrl -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile($fileUrl, "C:\test-webclient.png")}
