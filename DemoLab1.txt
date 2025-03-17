@@ -1,0 +1,5 @@
+##PowerShell Download Techniques
+
+powershell -c {$fileUrl="https://www.google.com/logos/2024/popcorn/rc4/cta.png"; Invoke-WebRequest -Uri $fileUrl -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri $fileUrl -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source $fileUrl -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile($fileUrl, "C:\test-webclient.png")}
+
+powershell -c 'Invoke-WebRequest -Uri "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile(\"https://www.google.com/logos/2024/popcorn/rc4/cta.png\", \"C:\test-webclient.png\")'
