@@ -39,7 +39,7 @@ Open the Group Policy Editor:
     Navigate to PowerShell Logging Settings:
 
     Go to Computer Configuration → Administrative Templates → Windows Components → Windows PowerShell.
-    Right-Click → Edit, Select Enable (for the middle 3 items in directory [Script Block Logging, Script Execution, PowerShell Transciption])
+    Right-Click → Edit, Select Enable (for the 2 items in directory [Script Block Logging, PowerShell Transciption])
 
 #######################################################################
 
