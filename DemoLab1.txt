@@ -70,3 +70,4 @@ https://docs.google.com/spreadsheets/d/1H9_xaxQHpWaa4O_Son4Gx0YOIzlcBWMsdvePFX68
 https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/default.aspx [Windows Logs]
 https://book.hacktricks.wiki/en/index.html [HowTo's Hacking / Defending]
 https://www.exploit-db.com/ [Exploit Database / Research]
+https://gchq.github.io/CyberChef/ [Data Mainpulation / Parsing Toolkit]
