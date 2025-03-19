@@ -46,7 +46,6 @@ Open the Group Policy Editor:
 ###### Events that will be captured
 Event ID	Event Name	Description	Log Location
 4688	A new process has been created  //Captures process creation, including command-line arguments when enabled//	Security Log
-4103	PowerShell Module Logging	//Logs PowerShell modules that are loaded and used//	Microsoft-Windows-PowerShell/Operational
 4104	PowerShell Script Block Logging	//Logs executed script blocks, including deobfuscated scripts//	Microsoft-Windows-PowerShell/Operational
 4105	PowerShell Command Start	//Captures the start of PowerShell command execution//	Microsoft-Windows-PowerShell/Operational
 4106	PowerShell Command End	//Captures the end of PowerShell command execution//	Microsoft-Windows-PowerShell/Operational
