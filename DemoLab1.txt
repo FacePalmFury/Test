@@ -62,3 +62,12 @@ powershell -c 'Invoke-WebRequest -Uri "https://www.google.com/logos/2024/popcorn
 #2
 powershell -c {$fileUrl="https://www.google.com/logos/2024/popcorn/rc4/cta.png"; Invoke-WebRequest -Uri $fileUrl -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri $fileUrl -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source $fileUrl -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile($fileUrl, "C:\test-webclient.png")}
 
+####Resources
+https://start.me/p/wMrA5z/cyber-threat-intelligence [Threat Intel Source / News Feed]
+https://attack.mitre.org/ [Cyber Attack Methodology]
+https://lolbas-project.github.io/ [Lay of the Land Binaries / Attack with what you got]
+https://d3fend.mitre.org/ [Cyber Defense Controls]
+https://docs.google.com/spreadsheets/d/1H9_xaxQHpWaa4O_Son4Gx0YOIzlcBWMsdvePFX68EKU/edit?gid=1636225066#gid=1636225066   [Threat Actors]
+https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/default.aspx [Windows Logs]
+https://book.hacktricks.wiki/en/index.html [HowTo's Hacking / Defending]
+https://www.exploit-db.com/ [Exploit Database / Research]
