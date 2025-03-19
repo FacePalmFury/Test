@@ -1,32 +1,47 @@
 ##Enable Logging
 ###Process CommandLine Logging
-# Enable Process Tracking (Audit Process Creation)
-New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" `
-    -Name "ProcessCreationIncludeCmdLine_Enabled" -Value 1 -PropertyType DWord -Force
+Step 1: Enable Process Creation Auditing (Event ID 4688)
+Open Group Policy Editor:
 
-# OR
+Press Win + R, type gpedit.msc, and press Enter.
+Navigate to the Audit Policy Settings:
 
-# Enable Audit Policy for Process Creation (Requires Admin)
-auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
+Go to:
+Computer Configuration → Windows Settings → Security Settings → Advanced Audit Policy Configuration → System Audit Policies - Local Group Policy Object → Detailed Tracking.
+Enable Process Creation Logging:
 
+Find "Audit Process Creation" on the right panel.
+Double-click it.
+Select "Configure the following audit events".
+Check Success and Failure.
+Click Apply and OK.
+
+Step 2: Enable Command Line Logging
+Navigate to the Command Line Logging Setting:
+
+In Group Policy Editor, go to:
+Computer Configuration → Administrative Templates → System → Audit Process Creation.
+Enable Logging of Command Line Arguments:
+
+Find "Include command line in process creation events".
+Double-click it.
+Select "Enabled".
+Click Apply and OK.
+
+#####################################################################
 ##Enable PowerShell Logging
 
-# Enable PowerShell Module Logging
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging" `
-    -Name "EnableModuleLogging" -Value 1 -Force
+### GUI GPO Editor
+Using Group Policy Editor (GPO)
+Open the Group Policy Editor:
 
-# Specify Modules to Log (e.g., all modules)
-New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames" -Force
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames" `
-    -Name "*" -Value "*" -Force
+    Press Win + R, type gpedit.msc, and hit Enter.
+    Navigate to PowerShell Logging Settings:
 
-# Enable PowerShell Script Block Logging
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" `
-    -Name "EnableScriptBlockLogging" -Value 1 -Force
+    Go to Computer Configuration → Administrative Templates → Windows Components → Windows PowerShell.
+    Right-Click → Edit, Select Enable (for the top 4 items in directory)
 
-# Enable PowerShell Transcription (records all commands & output)
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Transcription" `
-    -Name "EnableTranscripting" -Value 1 -Force
+#######################################################################
 
 ###### Events that will be captured
 Event ID	Event Name	Description	Log Location
@@ -41,8 +56,9 @@ C:\Users\<User>\Documents\PowerShell_Transcripts\
 
 
 ##PowerShell Download Techniques
+#1
 powershell -c 'Invoke-WebRequest -Uri "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source "https://www.google.com/logos/2024/popcorn/rc4/cta.png" -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile(\"https://www.google.com/logos/2024/popcorn/rc4/cta.png\", \"C:\test-webclient.png\")'
 
-
+#2
 powershell -c {$fileUrl="https://www.google.com/logos/2024/popcorn/rc4/cta.png"; Invoke-WebRequest -Uri $fileUrl -OutFile "C:\test-invoke-webrequest.png"; Invoke-RestMethod -Uri $fileUrl -OutFile "C:\test-invoke-restmethod.png"; Start-BitsTransfer -Source $fileUrl -Destination "C:\test-start-bitstransfer.png"; $webClient=New-Object System.Net.WebClient;$webClient.DownloadFile($fileUrl, "C:\test-webclient.png")}
 
